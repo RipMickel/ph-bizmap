@@ -1,8 +1,13 @@
-# ph-bizmap
+# 🏦 PH BankMap — Banking Network System
 
-# 🗺 PH BizMap — Business Mapping System
+An interactive **banking network mapping system for the Philippines**, built with **Leaflet.js, Chart.js, and vanilla JavaScript**.
 
-An interactive business mapping system for the Philippines, built with Leaflet.js, Chart.js, and vanilla JavaScript. Designed for sales territory management, logistics visualization, and market analysis.
+Designed for:
+
+* Branch network visualization
+* Asset distribution analysis
+* Territory management
+* Financial operations planning
 
 ---
 
@@ -18,22 +23,23 @@ npm start
 
 ## ✨ Features
 
-| Feature | Description |
-|---|---|
-| **Interactive Map** | Leaflet.js with CartoDB dark tiles + ESRI satellite |
-| **25 Sample Locations** | Philippines-wide business data (NCR, Luzon, Visayas, Mindanao) |
-| **Marker Clustering** | Toggle clustered/individual markers |
-| **Heatmap** | Sales-weighted heat layer |
-| **Territory Polygons** | Pre-drawn region boundaries + custom drawing tool |
-| **Filters** | Filter by region, category, min. sales |
-| **Search** | Live location search with zoom-to |
-| **Analytics Dashboard** | KPIs, territory breakdown bars, doughnut chart |
-| **Routing** | Click markers in routing mode to plot polyline routes |
-| **Export** | GeoJSON & CSV export of filtered locations |
-| **Import** | Drag-and-drop GeoJSON file import |
-| **LocalStorage** | Drawn territories persist across page reloads |
-| **Dark / Light Mode** | Toggle with header button |
-| **Responsive** | Works on mobile and desktop |
+| Feature                | Description                                                |
+| ---------------------- | ---------------------------------------------------------- |
+| 🗺 Interactive Map     | Leaflet.js with CartoDB dark tiles + ESRI satellite        |
+| 🏦 Bank Branch Data    | Nationwide branch coverage (NCR, Luzon, Visayas, Mindanao) |
+| 🔍 Search              | Live branch & location search with zoom-to                 |
+| 🎯 Filters             | Filter by region, branch type, and minimum assets          |
+| 📊 Analytics Dashboard | KPIs, asset breakdown, and branch insights                 |
+| 🔥 Heatmap             | Asset-weighted density visualization                       |
+| ⬡ Marker Clustering    | Toggle clustered or individual markers                     |
+| ⬟ Territory Polygons   | Predefined regions + custom drawing tools                  |
+| ✏ Drawing Tools        | Create and save custom territories                         |
+| 🚗 Routing             | Plot routes by clicking branches                           |
+| 📤 Export              | Export filtered data to GeoJSON & CSV                      |
+| 📥 Import              | Drag-and-drop GeoJSON support                              |
+| 💾 Persistence         | Saved drawings via LocalStorage                            |
+| 🌙 Dark / Light Mode   | Toggle UI themes                                           |
+| 📱 Responsive          | Optimized for desktop and mobile                           |
 
 ---
 
@@ -41,39 +47,54 @@ npm start
 
 ```
 /
-├── index.html          ← Main HTML shell
-├── style.css           ← All styles (CSS variables, dark/light mode)
-├── script.js           ← Map logic, filters, analytics, routing, export
+├── index.html          ← Main UI layout
+├── style.css           ← Styling (themes, layout, responsiveness)
+├── script.js           ← Core logic (map, filters, analytics, routing)
 ├── data/
-│   └── locations.json  ← 25 Philippines business locations
-├── package.json        ← npm config + live-server script
+│   └── locations.json  ← Bank branch dataset
+├── package.json        ← Dev server config
 └── README.md
 ```
 
 ---
 
-## 🌐 Deploy to GitHub Pages
+## 🌐 Deployment (GitHub Pages)
 
-1. `git init && git add . && git commit -m "Initial commit"`
-2. Create repo on github.com, then:
 ```bash
+git init
+git add .
+git commit -m "Initial commit"
+
 git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
 git push -u origin main
 ```
-3. Go to **Settings → Pages → Branch: main / folder: / (root)** → Save
-4. Site live at `https://YOUR_USER.github.io/YOUR_REPO/`
+
+Then:
+
+1. Go to **Settings → Pages**
+2. Set:
+
+   * Branch: `main`
+   * Folder: `/ (root)`
+3. Click **Save**
+
+Your site will be live at:
+
+```
+https://YOUR_USER.github.io/YOUR_REPO/
+```
 
 ---
 
 ## 🛠 Tech Stack
 
-- **[Leaflet.js](https://leafletjs.com/)** — Map rendering
-- **[Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw)** — Territory drawing
-- **[Leaflet.MarkerCluster](https://github.com/Leaflet/Leaflet.markercluster)** — Clustering
-- **[Leaflet.Heat](https://github.com/Leaflet/Leaflet.heat)** — Heatmap
-- **[Chart.js](https://www.chartjs.org/)** — Analytics charts
-- **CartoDB / ESRI** — Tile layers
-- **Vanilla JS** — No framework dependencies
+* **Leaflet.js** — Map rendering
+* **Leaflet.Draw** — Territory drawing
+* **Leaflet.MarkerCluster** — Marker clustering
+* **Leaflet.Heat** — Heatmap layer
+* **Chart.js** — Analytics charts
+* **CartoDB / ESRI** — Map tile providers
+* **Vanilla JavaScript** — No framework dependencies
 
 ---
 
@@ -84,23 +105,43 @@ git push -u origin main
   "locations": [
     {
       "id": 1,
-      "name": "Metro Manila HQ",
-      "lat": 14.5995,
-      "lng": 120.9842,
+      "name": "Makati Main Branch",
+      "lat": 14.5547,
+      "lng": 121.0244,
       "region": "NCR",
-      "category": "Headquarters",
-      "sales": 4850000,
+      "category": "Main Branch",
+      "assets": 4850000000,
       "address": "Makati City, Metro Manila"
     }
   ]
 }
 ```
 
-**Valid categories:** `Headquarters`, `Regional Office`, `Retail`, `Distribution`, `Warehouse`  
-**Valid regions:** `NCR`, `Luzon`, `Visayas`, `Mindanao`
+### Valid Branch Types
+
+* Main Branch
+* Branch
+* Rural Branch
+
+### Valid Regions
+
+* NCR
+* Luzon
+* Visayas
+* Mindanao
+
+---
+
+## 📈 Use Cases
+
+* 🏦 Bank network expansion planning
+* 📊 Asset distribution analysis
+* 🚚 Field operations & routing
+* 🗺 Territory management
+* 📍 Market coverage visualization
 
 ---
 
 ## 📝 License
 
-MIT
+MIT License
