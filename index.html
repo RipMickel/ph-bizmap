@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PH BankMap — Banking Network System</title>
+
+  <!-- ── Leaflet Core ── -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <!-- ── Leaflet Draw (territory polygons) ── -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+  <!-- ── Leaflet MarkerCluster ── -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+
+  <!-- ── Leaflet Heat ── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+
+  <!-- ── Chart.js ── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+  <!-- ── App Styles ── -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ════════════ HEADER ════════════ -->
+<header id="header">
+  <div class="logo">
+    <div class="logo-icon">🗺</div>
+    <h1>PH <span>BizMap</span></h1>
+  </div>
+  <div class="header-divider"></div>
+<div class="header-meta">BANKING NETWORK SYSTEM v1.0</div>  <div class="header-right">
+    <div class="live-badge"><div class="live-dot"></div>LIVE</div>
+    <button id="dark-mode-btn">☀ LIGHT</button>
+  </div>
+</header>
+
+<!-- ════════════ APP ════════════ -->
+<div id="app">
+
+  <!-- ── SIDEBAR ── -->
+  <aside id="sidebar">
+    <div id="sidebar-inner">
+
+      <!-- Tabs -->
+      <div class="sidebar-tabs">
+        <button class="tab-btn active" data-tab="explore">Explore</button>
+        <button class="tab-btn" data-tab="analytics">Analytics</button>
+        <button class="tab-btn" data-tab="tools">Tools</button>
+      </div>
+
+      <!-- ── EXPLORE TAB ── -->
+      <div class="tab-content active" id="explore-tab">
+
+        <!-- Search -->
+        <div class="search-wrap">
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="search-input" placeholder="Search locations..."/>
+          </div>
+          <div id="search-results"></div>
+        </div>
+
+        <!-- Region Filter -->
+        <div class="filter-section">
+          <div class="filter-label">Region</div>
+          <div class="filter-chips" id="region-chips">
+            <button class="chip active" data-region="All">All</button>
+            <button class="chip" data-region="NCR">NCR</button>
+            <button class="chip" data-region="Luzon">Luzon</button>
+            <button class="chip" data-region="Visayas">Visayas</button>
+            <button class="chip" data-region="Mindanao">Mindanao</button>
+          </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="filter-section">
+         <div class="filter-label">Branch Type</div>
+<div class="filter-chips" id="category-chips">
+  <button class="chip active" data-category="All">All</button>
+  <button class="chip" data-category="Main Branch">Main</button>
+  <button class="chip" data-category="Branch">Branch</button>
+  <button class="chip" data-category="Rural Branch">Rural</button>
+</div>
+        </div>
+
+        <!-- Sales Filter -->
+        <div class="filter-section">
+            <div class="filter-label">Min Assets (₱)</div>
+          <div class="range-wrap">
+            <input type="range" id="sales-range" min="0" max="5000000000" step="100000000" value="0"/>
+            <span id="sales-range-val">₱0</span>
+           <div class="range-labels">
+              <span>₱0</span>
+              <span id="sales-range-val">₱0</span>
+              <span>₱5M</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location List -->
+        <div id="location-list"></div>
+      </div>
+
+      <!-- ── ANALYTICS TAB ── -->
+      <div class="tab-content" id="analytics-tab">
+        <div class="analytics-header">Overview Metrics</div>
+
+        <div class="kpi-grid" id="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Assets</div>
+            <div class="kpi-value" id="kpi-total-sales">—</div>
+            <div class="kpi-sub">All regions</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Branches</div>
+            <div class="kpi-value" id="kpi-count">—</div>
+            <div class="kpi-sub">Active sites</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Avg Assets</div>
+            <div class="kpi-value" id="kpi-avg">—</div>
+            <div class="kpi-sub">Per location</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Top Region</div>
+            <div class="kpi-value" id="kpi-top-region" style="font-size:13px">—</div>
+            <div class="kpi-sub">By revenue</div>
+          </div>
+        </div>
+
+        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:7px;">Territory Breakdown</div>
+        <div class="territory-stats" id="territory-stats"></div>
+
+        <div class="chart-wrap" id="chart-wrap" style="margin-top:10px">
+          <div class="chart-title">Assets by Branch Type</div>
+          <canvas id="salesChart" height="160"></canvas>
+        </div>
+      </div>
+
+      <!-- ── TOOLS TAB ── -->
+      <div class="tab-content" id="tools-tab">
+
+        <div class="tool-section-title">Map Layers</div>
+        <button class="tool-btn" id="toggle-cluster">
+          <span class="btn-icon">⬡</span> Marker Clustering
+        </button>
+        <button class="tool-btn" id="toggle-heatmap">
+          <span class="btn-icon">🔥</span> Heatmap Layer
+        </button>
+        <button class="tool-btn" id="toggle-territories">
+          <span class="btn-icon">⬟</span> Territory Boundaries
+        </button>
+
+        <div class="tool-section-title" style="margin-top:12px">Territory Drawing</div>
+        <button class="tool-btn" id="draw-polygon-btn">
+          <span class="btn-icon">✏</span> Draw Territory Polygon
+        </button>
+        <button class="tool-btn" id="clear-drawings-btn">
+          <span class="btn-icon">🗑</span> Clear All Drawings
+        </button>
+
+        <div class="tool-section-title" style="margin-top:12px">Routing</div>
+        <p style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);margin-bottom:7px;">Click markers on map in routing mode</p>
+        <button class="tool-btn" id="toggle-routing">
+          <span class="btn-icon">↗</span> Routing Mode
+        </button>
+        <div class="route-controls">
+          <div id="route-list"></div>
+          <button class="tool-btn" id="clear-route-btn" style="margin-bottom:0">
+            <span class="btn-icon">✕</span> Clear Route
+          </button>
+        </div>
+
+        <div class="tool-section-title" style="margin-top:12px">Export / Import</div>
+        <button class="export-btn" id="export-geojson">⬇ Export GeoJSON</button>
+        <button class="export-btn" id="export-csv">⬇ Export CSV</button>
+        <label class="export-btn" style="cursor:pointer">
+          ⬆ Import GeoJSON
+          <input type="file" id="import-geojson" accept=".json,.geojson" style="display:none"/>
+        </label>
+      </div>
+
+    </div><!-- /sidebar-inner -->
+
+    <!-- Toggle handle -->
+    <button id="sidebar-toggle" title="Toggle Sidebar">◀</button>
+  </aside>
+
+  <!-- ── MAP ── -->
+  <div id="map-wrap">
+    <div id="map"></div>
+
+    <!-- Floating map-control buttons -->
+    <div id="map-controls">
+      <button class="map-ctrl-btn" id="btn-fit-bounds" title="Fit all markers">⊞</button>
+      <button class="map-ctrl-btn" id="btn-satellite" title="Toggle satellite layer">🛰</button>
+    </div>
+
+    <!-- Status bar -->
+    <div id="status-bar">Showing all bank branches · PH Banking Network System</div>
+
+    <!-- Hover tooltip -->
+    <div id="map-tooltip">
+      <div class="tt-name" id="tt-name"></div>
+      <div class="tt-meta" id="tt-meta"></div>
+      <div class="tt-sales" id="tt-sales"></div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script src="script.js"></script>
+</body>
+</html>                                                                                                                                                                                                     

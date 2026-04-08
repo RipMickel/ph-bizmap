@@ -1,0 +1,17 @@
+{
+  "name": "ph-business-mapping-system",
+  "version": "1.0.0",
+  "description": "Interactive business mapping system for the Philippines — territory management, logistics, and market analysis.",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=8080 --open=/index.html",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": ["leaflet", "mapping", "gis", "philippines", "business-intelligence"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "gh-pages": "^5.0.0"
+  }
+}

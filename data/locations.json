@@ -1,0 +1,45 @@
+{
+  "banks": [
+    { "id": "UB001", "name": "Philippine National Bank Corp.", "type": "Universal Bank" },
+    { "id": "UB002", "name": "Metro Capital Bank", "type": "Universal Bank" },
+    { "id": "RB001", "name": "Rural Bank of Manolo Fortich, Inc.", "type": "Rural Bank" },
+    { "id": "RB002", "name": "Visayas Farmers Rural Bank", "type": "Rural Bank" },
+    { "id": "RB003", "name": "BDO Network Bank", "type": "Rural Bank" },
+    { "id": "RB004", "name": "EastWest Rural Bank", "type": "Rural Bank" },
+    { "id": "RB005", "name": "CARD Bank", "type": "Rural Bank" },
+    { "id": "RB006", "name": "Cebuana Lhuillier Rural Bank", "type": "Rural Bank" },
+    { "id": "RB007", "name": "Guagua Rural Bank", "type": "Rural Bank" },
+    { "id": "RB008", "name": "Rang-ay Bank", "type": "Rural Bank" },
+    { "id": "RB009", "name": "Own Bank", "type": "Rural Bank" },
+    { "id": "RB010", "name": "Quezon Capital Rural Bank", "type": "Rural Bank" },
+    { "id": "RB011", "name": "GM Bank of Luzon", "type": "Rural Bank" },
+    { "id": "RB012", "name": "First Isabela Cooperative Bank", "type": "Rural Bank" }
+  ],
+  "branches": [
+    { "id": 1, "bank_id": "UB001", "name": "Makati Main Branch", "lat": 14.554729, "lng": 121.024445, "region": "NCR", "category": "Main Branch", "assets": 4850000000, "address": "Ayala Ave, Makati" },
+    { "id": 2, "bank_id": "UB001", "name": "BGC Branch", "lat": 14.550726, "lng": 121.050531, "region": "NCR", "category": "Branch", "assets": 2130000000, "address": "Bonifacio Global City, Taguig" },
+    { "id": 3, "bank_id": "UB001", "name": "Quezon City Branch", "lat": 14.650730, "lng": 121.032069, "region": "NCR", "category": "Branch", "assets": 1870000000, "address": "Quezon Ave, Quezon City" },
+    { "id": 4, "bank_id": "UB002", "name": "Pasig Main Branch", "lat": 14.576377, "lng": 121.085109, "region": "NCR", "category": "Main Branch", "assets": 3200000000, "address": "Ortigas Center, Pasig" },
+    { "id": 5, "bank_id": "UB002", "name": "Mandaluyong Branch", "lat": 14.579444, "lng": 121.035917, "region": "NCR", "category": "Branch", "assets": 980000000, "address": "EDSA, Mandaluyong" },
+    { "id": 6, "bank_id": "UB002", "name": "Parañaque Branch", "lat": 14.484568, "lng": 121.019834, "region": "NCR", "category": "Branch", "assets": 560000000, "address": "Parañaque City" },
+    { "id": 7, "bank_id": "UB001", "name": "Cebu Main Branch", "lat": 10.315699, "lng": 123.885437, "region": "Visayas", "category": "Main Branch", "assets": 2750000000, "address": "Cebu City" },
+    { "id": 8, "bank_id": "UB001", "name": "Iloilo Branch", "lat": 10.720150, "lng": 122.562106, "region": "Visayas", "category": "Branch", "assets": 1120000000, "address": "Iloilo City" },
+    { "id": 9, "bank_id": "UB002", "name": "Davao Main Branch", "lat": 7.190708, "lng": 125.455341, "region": "Mindanao", "category": "Main Branch", "assets": 3100000000, "address": "Davao City" },
+    { "id": 10, "bank_id": "UB002", "name": "Cagayan de Oro Branch", "lat": 8.454236, "lng": 124.631897, "region": "Mindanao", "category": "Branch", "assets": 1350000000, "address": "Cagayan de Oro City" },
+    { "id": 11, "bank_id": "RB001", "name": "Manolo Fortich Main Branch", "lat": 8.367617, "lng": 124.863432, "region": "Mindanao", "category": "Main Branch", "assets": 350000000, "address": "Manolo Fortich, Bukidnon" },
+    { "id": 12, "bank_id": "RB001", "name": "Malaybalay Branch", "lat": 8.157338, "lng": 125.127998, "region": "Mindanao", "category": "Branch", "assets": 220000000, "address": "Malaybalay City, Bukidnon" },
+    { "id": 13, "bank_id": "RB002", "name": "Tacloban Branch", "lat": 11.243344, "lng": 125.004365, "region": "Visayas", "category": "Branch", "assets": 760000000, "address": "Tacloban City" },
+    { "id": 14, "bank_id": "RB002", "name": "Dumaguete Branch", "lat": 9.307691, "lng": 123.308038, "region": "Visayas", "category": "Branch", "assets": 490000000, "address": "Dumaguete City" },
+
+    { "id": 15, "bank_id": "RB003", "name": "BDO Network Bank Main Branch", "lat": 14.5898, "lng": 121.0610, "region": "NCR", "category": "Main Branch", "assets": 1500000000, "address": "Quezon City" },
+    { "id": 16, "bank_id": "RB004", "name": "EastWest Rural Bank Main Branch", "lat": 14.5864, "lng": 121.0555, "region": "NCR", "category": "Main Branch", "assets": 1200000000, "address": "Pasig City" },
+    { "id": 17, "bank_id": "RB005", "name": "CARD Bank Main Branch", "lat": 14.5520, "lng": 121.0340, "region": "NCR", "category": "Main Branch", "assets": 980000000, "address": "Mandaluyong City" },
+    { "id": 18, "bank_id": "RB006", "name": "Cebuana Lhuillier Rural Bank Main Branch", "lat": 10.3157, "lng": 123.8854, "region": "Visayas", "category": "Main Branch", "assets": 850000000, "address": "Cebu City" },
+    { "id": 19, "bank_id": "RB007", "name": "Guagua Rural Bank Main Branch", "lat": 15.0658, "lng": 120.5750, "region": "Luzon", "category": "Main Branch", "assets": 400000000, "address": "Guagua, Pampanga" },
+    { "id": 20, "bank_id": "RB008", "name": "Rang-ay Bank Main Branch", "lat": 15.1280, "lng": 120.5833, "region": "Luzon", "category": "Main Branch", "assets": 360000000, "address": "San Fernando, Pampanga" },
+    { "id": 21, "bank_id": "RB009", "name": "Own Bank Main Branch", "lat": 14.4286, "lng": 120.9339, "region": "Luzon", "category": "Main Branch", "assets": 310000000, "address": "Cavite City" },
+    { "id": 22, "bank_id": "RB010", "name": "Quezon Capital Rural Bank Main Branch", "lat": 14.1099, "lng": 121.1689, "region": "Luzon", "category": "Main Branch", "assets": 280000000, "address": "Lucena City" },
+    { "id": 23, "bank_id": "RB011", "name": "GM Bank of Luzon Main Branch", "lat": 14.6760, "lng": 121.0437, "region": "Luzon", "category": "Main Branch", "assets": 250000000, "address": "Quezon City" },
+    { "id": 24, "bank_id": "RB012", "name": "First Isabela Cooperative Bank Main Branch", "lat": 16.3667, "lng": 121.7333, "region": "Luzon", "category": "Main Branch", "assets": 220000000, "address": "Cauayan City, Isabela" }
+  ]
+}
