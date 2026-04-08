@@ -1,0 +1,29 @@
+{
+  "locations": [
+    { "id": 1, "name": "Metro Manila HQ", "lat": 14.5995, "lng": 120.9842, "region": "NCR", "category": "Headquarters", "sales": 4850000, "address": "Makati City, Metro Manila" },
+    { "id": 2, "name": "BGC Flagship Store", "lat": 14.5466, "lng": 121.0511, "region": "NCR", "category": "Retail", "sales": 2130000, "address": "Bonifacio Global City, Taguig" },
+    { "id": 3, "name": "Quezon City Branch", "lat": 14.6760, "lng": 121.0437, "region": "NCR", "category": "Retail", "sales": 1870000, "address": "Quezon City, Metro Manila" },
+    { "id": 4, "name": "Pasig Distribution Hub", "lat": 14.5764, "lng": 121.0851, "region": "NCR", "category": "Distribution", "sales": 3200000, "address": "Pasig City, Metro Manila" },
+    { "id": 5, "name": "Mandaluyong Outlet", "lat": 14.5794, "lng": 121.0359, "region": "NCR", "category": "Retail", "sales": 980000, "address": "Mandaluyong City" },
+    { "id": 6, "name": "Parañaque Warehouse", "lat": 14.4793, "lng": 121.0198, "region": "NCR", "category": "Warehouse", "sales": 560000, "address": "Parañaque City" },
+    { "id": 7, "name": "Cebu City Office", "lat": 10.3157, "lng": 123.8854, "region": "Visayas", "category": "Regional Office", "sales": 2750000, "address": "Cebu City, Cebu" },
+    { "id": 8, "name": "Mandaue Distribution", "lat": 10.3236, "lng": 123.9223, "region": "Visayas", "category": "Distribution", "sales": 1640000, "address": "Mandaue City, Cebu" },
+    { "id": 9, "name": "Lapu-Lapu Outlet", "lat": 10.3103, "lng": 123.9494, "region": "Visayas", "category": "Retail", "sales": 890000, "address": "Lapu-Lapu City, Cebu" },
+    { "id": 10, "name": "Iloilo Branch", "lat": 10.7202, "lng": 122.5621, "region": "Visayas", "category": "Retail", "sales": 1120000, "address": "Iloilo City, Iloilo" },
+    { "id": 11, "name": "Bacolod Store", "lat": 10.6765, "lng": 122.9509, "region": "Visayas", "category": "Retail", "sales": 780000, "address": "Bacolod City, Negros Occidental" },
+    { "id": 12, "name": "Davao Regional Hub", "lat": 7.1907, "lng": 125.4553, "region": "Mindanao", "category": "Regional Office", "sales": 3100000, "address": "Davao City, Davao del Sur" },
+    { "id": 13, "name": "General Santos Depot", "lat": 6.1164, "lng": 125.1716, "region": "Mindanao", "category": "Warehouse", "sales": 870000, "address": "General Santos City" },
+    { "id": 14, "name": "Cagayan de Oro Branch", "lat": 8.4542, "lng": 124.6319, "region": "Mindanao", "category": "Retail", "sales": 1350000, "address": "Cagayan de Oro City" },
+    { "id": 15, "name": "Zamboanga Office", "lat": 6.9214, "lng": 122.0790, "region": "Mindanao", "category": "Regional Office", "sales": 940000, "address": "Zamboanga City" },
+    { "id": 16, "name": "Baguio Highland Store", "lat": 16.4023, "lng": 120.5960, "region": "Luzon", "category": "Retail", "sales": 1050000, "address": "Baguio City, Benguet" },
+    { "id": 17, "name": "Angeles City Branch", "lat": 15.1450, "lng": 120.5887, "region": "Luzon", "category": "Retail", "sales": 920000, "address": "Angeles City, Pampanga" },
+    { "id": 18, "name": "San Fernando Depot", "lat": 15.0285, "lng": 120.6900, "region": "Luzon", "category": "Distribution", "sales": 730000, "address": "San Fernando, Pampanga" },
+    { "id": 19, "name": "Dagupan Outlet", "lat": 16.0433, "lng": 120.3330, "region": "Luzon", "category": "Retail", "sales": 610000, "address": "Dagupan City, Pangasinan" },
+    { "id": 20, "name": "Lucena Branch", "lat": 13.9322, "lng": 121.6170, "region": "Luzon", "category": "Retail", "sales": 680000, "address": "Lucena City, Quezon" },
+    { "id": 21, "name": "Legazpi Office", "lat": 13.1391, "lng": 123.7438, "region": "Luzon", "category": "Regional Office", "sales": 540000, "address": "Legazpi City, Albay" },
+    { "id": 22, "name": "Tacloban Branch", "lat": 11.2543, "lng": 125.0000, "region": "Visayas", "category": "Retail", "sales": 760000, "address": "Tacloban City, Leyte" },
+    { "id": 23, "name": "Dumaguete Outlet", "lat": 9.3076, "lng": 123.3080, "region": "Visayas", "category": "Retail", "sales": 490000, "address": "Dumaguete City, Negros Oriental" },
+    { "id": 24, "name": "Cotabato Distribution", "lat": 7.2047, "lng": 124.2310, "region": "Mindanao", "category": "Distribution", "sales": 620000, "address": "Cotabato City" },
+    { "id": 25, "name": "Butuan Branch", "lat": 8.9475, "lng": 125.5406, "region": "Mindanao", "category": "Retail", "sales": 530000, "address": "Butuan City, Agusan del Norte" }
+  ]
+}
