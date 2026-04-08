@@ -12,7 +12,7 @@ const STATE = {
   markers:        {},          // id → Leaflet marker
   selectedRegion: 'All',
   selectedCat:    'All',
-  minSales:       0,
+  minAssets: 0,
   routeMode:      false,
   routeStops:     [],          // array of location ids
   routePolyline:  null,
@@ -152,7 +152,8 @@ function loadData() {
       return r.json();
     })
     .then(json => {
-      STATE.data     = json.locations;
+      STATE.banks    = json.banks || [];
+      STATE.data     = json.branches || json.locations || [];
       STATE.filtered = [...STATE.data];
       buildMarkers();
       renderLocationList();
@@ -214,6 +215,7 @@ function buildMarkers() {
 }
 
 function buildPopupHTML(loc) {
+    const bank = STATE.banks?.find(b => b.id === loc.bank_id);
   return `
     <div class="popup-inner">
       <div class="popup-name">${loc.name}</div>
@@ -224,8 +226,10 @@ function buildPopupHTML(loc) {
         <span class="popup-val">${loc.category}</span>
         <span class="popup-key">Address</span>
         <span class="popup-val">${loc.address}</span>
-        <span class="popup-key">Sales</span>
-        <span class="popup-val popup-sales-val">${formatCurrency(loc.sales)}</span>
+        <span class="popup-key">Assets</span>
+        <span class="popup-val popup-sales-val">${formatCurrency(loc.assets)}</span>
+        <span class="popup-key">Bank</span>
+<span class="popup-val">${bank ? bank.name : '—'}</span>
       </div>
     </div>`;
 }
@@ -255,9 +259,9 @@ function applyFilters() {
   STATE.filtered = STATE.data.filter(loc => {
     const matchRegion = STATE.selectedRegion === 'All' || loc.region === STATE.selectedRegion;
     const matchCat    = STATE.selectedCat    === 'All' || loc.category === STATE.selectedCat;
-    const matchSales  = loc.sales >= STATE.minSales;
+    const matchAssets = loc.assets >= STATE.minAssets;
     const matchSearch = !q || loc.name.toLowerCase().includes(q) || loc.address.toLowerCase().includes(q);
-    return matchRegion && matchCat && matchSales && matchSearch;
+    return matchRegion && matchCat && matchAssets && matchSearch;
   });
 
   updateMarkerVisibility();
@@ -300,7 +304,7 @@ function refreshHeatmap() {
   if (!STATE.heatEnabled) return;
 
   const pts = STATE.filtered.map(loc => [
-    loc.lat, loc.lng, Math.min(loc.sales / 5000000, 1)
+    loc.lat, loc.lng, Math.min(loc.assets / 5000000000, 1)
   ]);
   STATE.heatLayer = L.heatLayer(pts, { radius: 40, blur: 25, maxZoom: 10 }).addTo(map);
 }
@@ -326,7 +330,7 @@ function renderLocationList() {
         <div class="loc-name">${loc.name}</div>
         <div class="loc-meta">${loc.region} · ${loc.category}</div>
       </div>
-      <div class="loc-sales">${formatCurrencyShort(loc.sales)}</div>`;
+      <div class="loc-sales">${formatCurrencyShort(loc.assets)}</div>`;
     item.addEventListener('click', () => zoomToLocation(loc));
     el.appendChild(item);
   });
@@ -387,7 +391,7 @@ function clearRoute() {
 
 /* ── Analytics ───────────────────────────────────────────── */
 function renderAnalytics() {
-  const total   = STATE.filtered.reduce((s, l) => s + l.sales, 0);
+  const total   = STATE.filtered.reduce((s, l) => s + l.assets, 0);
   const count   = STATE.filtered.length;
   const avg     = count ? Math.round(total / count) : 0;
 
@@ -399,17 +403,17 @@ function renderAnalytics() {
   // Territory breakdown
   const byRegion = {};
   STATE.filtered.forEach(l => {
-    byRegion[l.region] = (byRegion[l.region] || 0) + l.sales;
+    byRegion[l.region] = (byRegion[l.region] || 0) + l.assets;
   });
   const topRegion = Object.entries(byRegion).sort((a, b) => b[1] - a[1])[0];
   document.getElementById('kpi-top-region').textContent = topRegion ? topRegion[0] : '—';
 
-  const maxSales = Math.max(...Object.values(byRegion), 1);
+  const maxAssets = Math.max(...Object.values(byRegion), 1);
   const statsEl  = document.getElementById('territory-stats');
   statsEl.innerHTML = '';
   Object.entries(byRegion).sort((a, b) => b[1] - a[1]).forEach(([region, sales]) => {
     const color  = REGION_COLOR[region] || '#00d4ff';
-    const pct    = ((sales / maxSales) * 100).toFixed(1);
+    const pct = ((sales / maxAssets) * 100).toFixed(1);
     const locCnt = STATE.filtered.filter(l => l.region === region).length;
     statsEl.innerHTML += `
       <div class="t-stat">
@@ -431,7 +435,7 @@ function renderChart() {
   // Aggregate by category
   const byCat = {};
   STATE.filtered.forEach(l => {
-    byCat[l.category] = (byCat[l.category] || 0) + l.sales;
+    byCat[l.category] = (byCat[l.category] || 0) + l.assets;
   });
   const labels = Object.keys(byCat);
   const values = labels.map(k => byCat[k]);
@@ -510,7 +514,7 @@ function exportGeoJSON() {
   const features = STATE.filtered.map(loc => ({
     type: 'Feature',
     geometry: { type: 'Point', coordinates: [loc.lng, loc.lat] },
-    properties: { id: loc.id, name: loc.name, region: loc.region, category: loc.category, sales: loc.sales, address: loc.address },
+    properties: { id: loc.id, name: loc.name, region: loc.region, category: loc.category, assets: loc.assets, address: loc.address },
   }));
   const gj      = { type: 'FeatureCollection', features };
   const blob     = new Blob([JSON.stringify(gj, null, 2)], { type: 'application/json' });
@@ -523,9 +527,9 @@ function exportGeoJSON() {
 }
 
 function exportCSV() {
-  const rows = [['ID','Name','Region','Category','Sales','Lat','Lng','Address']];
+  const rows = [['ID','Name','Region','Category','Assets','Lat','Lng','Address']];
   STATE.filtered.forEach(l => {
-    rows.push([l.id, `"${l.name}"`, l.region, l.category, l.sales, l.lat, l.lng, `"${l.address}"`]);
+    rows.push([l.id, `"${l.name}"`, l.region, l.category, l.assets, l.lat, l.lng, `"${l.address}"`]);
   });
   const csv  = rows.map(r => r.join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
@@ -585,7 +589,7 @@ function showTooltip(loc, ev) {
   const tt = document.getElementById('map-tooltip');
   document.getElementById('tt-name').textContent  = loc.name;
   document.getElementById('tt-meta').textContent  = `${loc.region} · ${loc.category}`;
-  document.getElementById('tt-sales').textContent = formatCurrency(loc.sales);
+  document.getElementById('tt-sales').textContent = formatCurrency(loc.assets);
   tt.style.display = 'block';
   moveTooltip(ev);
 }
@@ -668,8 +672,8 @@ function initUI() {
   const rangeEl = document.getElementById('sales-range');
   const rangeValEl = document.getElementById('sales-range-val');
   rangeEl.addEventListener('input', () => {
-    STATE.minSales   = Number(rangeEl.value);
-    rangeValEl.textContent = formatCurrencyShort(STATE.minSales);
+    STATE.minAssets = Number(rangeEl.value);
+rangeValEl.textContent = formatCurrencyShort(STATE.minAssets);
     applyFilters();
   });
 

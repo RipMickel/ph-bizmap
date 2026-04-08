@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PH BizMap — Business Mapping System</title>
+<title>PH BankMap — Banking Network System</title>
 
   <!-- ── Leaflet Core ── -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
@@ -36,8 +36,7 @@
     <h1>PH <span>BizMap</span></h1>
   </div>
   <div class="header-divider"></div>
-  <div class="header-meta">BUSINESS MAPPING SYSTEM v1.0</div>
-  <div class="header-right">
+<div class="header-meta">BANKING NETWORK SYSTEM v1.0</div>  <div class="header-right">
     <div class="live-badge"><div class="live-dot"></div>LIVE</div>
     <button id="dark-mode-btn">☀ LIGHT</button>
   </div>
@@ -83,23 +82,22 @@
 
         <!-- Category Filter -->
         <div class="filter-section">
-          <div class="filter-label">Category</div>
-          <div class="filter-chips" id="category-chips">
-            <button class="chip active" data-category="All">All</button>
-            <button class="chip cat-Headquarters" data-category="Headquarters">HQ</button>
-            <button class="chip cat-Regional-Office" data-category="Regional Office">Regional</button>
-            <button class="chip cat-Retail" data-category="Retail">Retail</button>
-            <button class="chip cat-Distribution" data-category="Distribution">Distrib.</button>
-            <button class="chip cat-Warehouse" data-category="Warehouse">Warehouse</button>
-          </div>
+         <div class="filter-label">Branch Type</div>
+<div class="filter-chips" id="category-chips">
+  <button class="chip active" data-category="All">All</button>
+  <button class="chip" data-category="Main Branch">Main</button>
+  <button class="chip" data-category="Branch">Branch</button>
+  <button class="chip" data-category="Rural Branch">Rural</button>
+</div>
         </div>
 
         <!-- Sales Filter -->
         <div class="filter-section">
-          <div class="filter-label">Min Sales (₱)</div>
+            <div class="filter-label">Min Assets (₱)</div>
           <div class="range-wrap">
-            <input type="range" id="sales-range" min="0" max="5000000" step="100000" value="0"/>
-            <div class="range-labels">
+            <input type="range" id="sales-range" min="0" max="5000000000" step="100000000" value="0"/>
+            <span id="sales-range-val">₱0</span>
+           <div class="range-labels">
               <span>₱0</span>
               <span id="sales-range-val">₱0</span>
               <span>₱5M</span>
@@ -117,17 +115,17 @@
 
         <div class="kpi-grid" id="kpi-grid">
           <div class="kpi-card">
-            <div class="kpi-label">Total Sales</div>
+            <div class="kpi-label">Total Assets</div>
             <div class="kpi-value" id="kpi-total-sales">—</div>
             <div class="kpi-sub">All regions</div>
           </div>
           <div class="kpi-card">
-            <div class="kpi-label">Locations</div>
+            <div class="kpi-label">Branches</div>
             <div class="kpi-value" id="kpi-count">—</div>
             <div class="kpi-sub">Active sites</div>
           </div>
           <div class="kpi-card">
-            <div class="kpi-label">Avg Sales</div>
+            <div class="kpi-label">Avg Assets</div>
             <div class="kpi-value" id="kpi-avg">—</div>
             <div class="kpi-sub">Per location</div>
           </div>
@@ -142,7 +140,7 @@
         <div class="territory-stats" id="territory-stats"></div>
 
         <div class="chart-wrap" id="chart-wrap" style="margin-top:10px">
-          <div class="chart-title">Sales by Category</div>
+          <div class="chart-title">Assets by Branch Type</div>
           <canvas id="salesChart" height="160"></canvas>
         </div>
       </div>
@@ -207,7 +205,7 @@
     </div>
 
     <!-- Status bar -->
-    <div id="status-bar">Showing all 25 locations · PH Business Mapping System</div>
+    <div id="status-bar">Showing all bank branches · PH Banking Network System</div>
 
     <!-- Hover tooltip -->
     <div id="map-tooltip">
